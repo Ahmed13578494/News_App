@@ -4,8 +4,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:news_app_c14/Core/resources/AssetManager.dart';
 import 'package:news_app_c14/Core/resources/ColorManager.dart';
 import 'package:news_app_c14/Core/resources/StringManager.dart';
+import 'package:news_app_c14/Model/CategoryModel.dart';
 
 class CustomDrawer extends StatelessWidget{
+  void Function() onClick;
+  CustomDrawer({required this.onClick});
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -27,9 +30,7 @@ class CustomDrawer extends StatelessWidget{
             child: Column(
               children: [
                 InkWell(
-                  onTap: (){
-                    // Navigator HomeDetalis
-                  },
+                  onTap: onClick,
                   child: Row(
                     children: [
                       SvgPicture.asset(AssetManager.home,

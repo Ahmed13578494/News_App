@@ -6,10 +6,11 @@ import 'package:news_app_c14/Core/resources/ColorManager.dart';
 import 'package:news_app_c14/Core/resources/StringManager.dart';
 import 'package:news_app_c14/Model/CategoryModel.dart';
 
-class CategoryIten extends StatelessWidget{
+class CategoryItem extends StatelessWidget{
   int index;
   CategoryModel categoryModel;
-  CategoryIten({required this.index , required this.categoryModel});
+  void Function() onPress;
+  CategoryItem({required this.index , required this.categoryModel , required this.onPress});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -43,7 +44,7 @@ class CategoryIten extends StatelessWidget{
                 Directionality(
                   textDirection: index.isOdd?TextDirection.ltr:TextDirection.rtl,
                   child: ElevatedButton(
-                      onPressed: (){},
+                      onPressed: onPress,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: ColorManager.whiteColor.withOpacity(0.5),
                         padding: REdgeInsetsDirectional.only(end: 16)

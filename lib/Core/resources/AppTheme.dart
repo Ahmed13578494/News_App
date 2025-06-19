@@ -31,6 +31,24 @@ class AppTheme {
             fontWeight: FontWeight.w500,
             color: ColorManager.whiteColor
         ),
+
+        titleSmall: TextStyle(
+            color: ColorManager.blackColor,
+            fontSize: 16.sp,
+            fontWeight: FontWeight.w700
+        ),
+
+        bodySmall: TextStyle(
+            color: ColorManager.greyColor,
+            fontSize: 12.sp,
+            fontWeight: FontWeight.w500
+        ),
+
+        bodyLarge: TextStyle(
+            color: ColorManager.whiteColor,
+            fontSize: 14.sp,
+            fontWeight: FontWeight.w500
+        ),
       ),
 
     colorScheme: ColorScheme.fromSeed(
@@ -68,6 +86,24 @@ class AppTheme {
             fontSize: 24.sp,
             fontWeight: FontWeight.w500,
             color: ColorManager.blackColor
+        ),
+
+        titleSmall: TextStyle(
+            color: ColorManager.whiteColor,
+            fontSize: 16.sp,
+            fontWeight: FontWeight.w700
+        ),
+
+        bodySmall: TextStyle(
+            color: ColorManager.greyColor,
+            fontSize: 12.sp,
+            fontWeight: FontWeight.w500
+        ),
+
+        bodyLarge: TextStyle(
+            color: ColorManager.blackColor,
+            fontSize: 14.sp,
+            fontWeight: FontWeight.w500
         ),
       ),
 

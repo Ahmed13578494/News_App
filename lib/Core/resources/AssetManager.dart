@@ -1,6 +1,7 @@
 abstract final class AssetManager {
   static const String arrow = "assets/icons/Arrow.svg";
   static const String search = "assets/icons/Search.svg";
+  static const String close = "assets/icons/Close.svg";
   static const String home = "assets/icons/Home.svg";
   static const String theme = "assets/icons/Theme.svg";
   static const String language = "assets/icons/Language.svg";
