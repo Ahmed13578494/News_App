@@ -19,6 +19,13 @@ class _HomeScreenState extends State<HomeScreen> {
   CategoryModel? categoryModel;
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    //print("Ahmed Mahmiud-----------");
+    //ApiManager.getSources("general");
+  }
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: CustomDrawer(onClick: showHomeWidget,),
@@ -48,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       body: categoryModel != null
-          ? CategoryDetailsWidget()
+          ? CategoryDetailsWidget(categoryModel!)
           : HomeWidget(onCategoryClick: showCategoryDetails,),
     );
   }
