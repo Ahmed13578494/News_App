@@ -36,12 +36,12 @@ class CategoryModel {
     CategoryModel(
       title: StringManager.sceince,
       image: AssetManager.sceince,
-      id: 'sceince',
+      id: 'science',
     ),
     CategoryModel(
       title: StringManager.sport,
       image: AssetManager.sport,
-      id: 'sport',
+      id: 'sports',
     ),
     CategoryModel(
       title: StringManager.technology,

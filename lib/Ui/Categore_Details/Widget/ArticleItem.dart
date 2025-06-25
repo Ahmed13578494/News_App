@@ -4,7 +4,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_app_c14/Ui/Categore_Details/Widget/ArticleDetailsSheet.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
+import '../../../Model/EverythingResponse/Articles.dart';
+
 class ArticleItem extends StatelessWidget {
+  Articles articles;
+
+  ArticleItem({required this.articles});
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -13,7 +18,10 @@ class ArticleItem extends StatelessWidget {
           context: context,
 
           backgroundColor: Theme.of(context).colorScheme.primary,
-          builder: (context) => ArticleDetailsSheet(),
+          builder: (context) =>
+              ArticleDetailsSheet(
+                articles: articles,
+              ),
         );
       },
       child: Container(
@@ -27,8 +35,7 @@ class ArticleItem extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(8.r),
               child: CachedNetworkImage(
-                imageUrl:
-                    "https://miro.medium.com/v2/resize:fit:1200/1*u70S_HwUu2v4tGn5V0K_7A.png",
+                imageUrl: articles.urlToImage ?? "",
                 height: 220.h,
                 width: double.infinity,
                 fit: BoxFit.cover,
@@ -52,7 +59,7 @@ class ArticleItem extends StatelessWidget {
             ),
             SizedBox(height: 10.h),
             Text(
-              "40-year-old man falls 200 feet to his death while canyoneering at national park",
+              articles.title ?? "",
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: Theme.of(context).textTheme.titleSmall,
@@ -61,17 +68,26 @@ class ArticleItem extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  "By : Jon Haworth",
-                  style: Theme.of(context).textTheme.bodySmall,
+                Expanded(
+                  flex: 4,
+                  child: Text("By : ${articles.author}",
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .bodySmall,
+                  ),
                 ),
 
-                Text(
-                  timeago.format(
-                    DateTime.now().subtract(Duration(minutes: 15)),
-                  ),
+                Expanded(
+                  child: Text(
+                    timeago.format(
+                        DateTime.parse(articles.publishedAt ?? "")),
 
-                  style: Theme.of(context).textTheme.bodySmall,
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .bodySmall,
+                  ),
                 ),
               ],
             ),

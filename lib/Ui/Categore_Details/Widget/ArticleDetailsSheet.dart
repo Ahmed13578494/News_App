@@ -2,8 +2,18 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_app_c14/Core/resources/StringManager.dart';
+import 'package:news_app_c14/Model/EverythingResponse/Articles.dart';
 
-class ArticleDetailsSheet extends StatelessWidget {
+class ArticleDetailsSheet extends StatefulWidget {
+  Articles articles;
+
+  ArticleDetailsSheet({required this.articles});
+
+  @override
+  State<ArticleDetailsSheet> createState() => _ArticleDetailsSheetState();
+}
+
+class _ArticleDetailsSheetState extends State<ArticleDetailsSheet> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -14,8 +24,7 @@ class ArticleDetailsSheet extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(8.r),
               child: CachedNetworkImage(
-                imageUrl:
-                    "https://technobrains.io/wp-content/uploads/2021/07/flutter-Featured-Blog-Image2.jpg",
+                imageUrl: widget.articles.urlToImage ?? "",
                 height: 220.h,
                 width: double.infinity,
                 fit: BoxFit.cover,
@@ -39,7 +48,7 @@ class ArticleDetailsSheet extends StatelessWidget {
             ),
             SizedBox(height: 10.h),
             Text(
-              "A 40-year-old man has fallen approximately 200 feet to his death while canyoneering with three others at Zion National Park in Utah, authorities confirmed.\r\nThe incident occurred on Saturday when the… [+1529 chars]",
+              widget.articles.content ?? "",
               //maxLines: 2,
               //overflow: TextOverflow.ellipsis,
               style: Theme.of(context).textTheme.bodyLarge,
@@ -49,7 +58,9 @@ class ArticleDetailsSheet extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  //articles.url??"";
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Theme.of(context).colorScheme.onPrimary,
                   shape: RoundedRectangleBorder(
