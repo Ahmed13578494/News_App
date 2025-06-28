@@ -23,7 +23,7 @@ class EverythingResponse {
     if (json['articles'] != null) {
       articles = [];
       json['articles'].forEach((v) {
-        articles?.add(Articles.fromJson(v));
+        articles?.add(Article.fromJson(v));
       });
     }
   }
@@ -32,7 +32,7 @@ class EverythingResponse {
   String? code;
   String? message;
   num? totalResults;
-  List<Articles>? articles;
+  List<Article>? articles;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

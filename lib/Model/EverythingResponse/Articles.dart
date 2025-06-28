@@ -9,8 +9,8 @@ import '../SourcesResponnse/Source.dart';
 /// publishedAt : "2025-06-21T16:02:03Z"
 /// content : "There are also discounts available on Amazons Fire TV Soundbar Plus and Ankers versatile 3-in-1 charger.\r\nThere are also discounts available on Amazons Fire TV Soundbar Plus and Ankers versatile 3-in… [+4007 chars]"
 
-class Articles {
-  Articles({
+class Article {
+  Article({
     this.source,
     this.author,
     this.title,
@@ -21,7 +21,7 @@ class Articles {
     this.content,
   });
 
-  Articles.fromJson(dynamic json) {
+  Article.fromJson(dynamic json) {
     source = json['source'] != null ? Source.fromJson(json['source']) : null;
     author = json['author'];
     title = json['title'];

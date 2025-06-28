@@ -7,7 +7,7 @@ import 'package:timeago/timeago.dart' as timeago;
 import '../../../Model/EverythingResponse/Articles.dart';
 
 class ArticleItem extends StatelessWidget {
-  Articles articles;
+  Article articles;
 
   ArticleItem({required this.articles});
   @override

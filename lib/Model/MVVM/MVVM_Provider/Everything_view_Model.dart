@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:news_app_c14/Core/remote/network/ApiManager.dart';
 
-import '../EverythingResponse/Articles.dart';
+import '../../EverythingResponse/Articles.dart';
 
 class EverythingViewModel extends ChangeNotifier {
-  List<Articles> articles = [];
+  List<Article> articles = [];
   String? errorMessage;
   bool isLoading = false;
 

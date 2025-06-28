@@ -10,11 +10,13 @@ class ApiManager {
     // https://newsapi.org/v2/top-headlines/sources?apiKey=API_KEY
     try {
       Uri url = Uri.https(
-          domain,
-          "v2/top-headlines/sources",
+          domain, // اسم السيرفير
+          "v2/top-headlines/sources", // اسم الApi
           {
-        "apiKey": apiKey,
-        "category": category,
+            "apiKey": apiKey,
+            // هنا بنبعت الApiKey عشان الديكمونتيشن معموله Required
+            "category": category,
+            // وهنا بنبعت اسم المصدر بId عشان يجبلنا اسامي المصادر بId معين
       });
       //var response = await http.get(Uri.parse("https://newsapi.org/v2/top-headlines/sources?apiKey=API_KEY"));
       var response = await http.get(url);

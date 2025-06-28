@@ -5,7 +5,7 @@ import 'package:news_app_c14/Core/resources/StringManager.dart';
 import 'package:news_app_c14/Model/EverythingResponse/Articles.dart';
 
 class ArticleDetailsSheet extends StatefulWidget {
-  Articles articles;
+  Article articles;
 
   ArticleDetailsSheet({required this.articles});
 

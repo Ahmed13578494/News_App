@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:news_app_c14/Model/MVVM/Everything_view_Model.dart';
+import 'package:news_app_c14/Model/MVVM/MVVM_Cubit/ArticlesDetailsVeiwModel.dart';
 import 'package:news_app_c14/Ui/Categore_Details/Widget/ArticleItem.dart';
-import 'package:provider/provider.dart';
 
 class ArticlesList extends StatefulWidget {
   String sourceId;
@@ -16,7 +16,60 @@ class ArticlesList extends StatefulWidget {
 class _ArticlesListState extends State<ArticlesList> {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
+    return BlocProvider(
+      create: (context) =>
+      ArticlesDetailsViewModel()
+        ..getArticles(widget.sourceId),
+      child: BlocBuilder<ArticlesDetailsViewModel, ArticlesDetailsState>(
+        builder: (context, state) {
+          var viewModel = BlocProvider.of<ArticlesDetailsViewModel>(context);
+          if (state is ErrorState) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(state.errorMessage, style: TextStyle(
+                    fontSize: 20.sp,
+                    color: Theme
+                        .of(context)
+                        .colorScheme
+                        .primary
+                ),),
+                SizedBox(height: 10.h,),
+                ElevatedButton(
+                    onPressed: () {
+                      /*setState(() {
+
+                        });*/
+                      //viewModel.errorMessage = null;
+                      //viewModel.getSources(widget.categoryModel.id);
+                      viewModel.getArticles(widget.sourceId);
+                    },
+                    child: Text("Try Again")
+                )
+              ],
+            );
+          } else if (state is SuccessState) {
+            return ListView.separated(
+              itemBuilder: (context, index) =>
+                  ArticleItem(
+                      articles: state.articles[index]
+                  ),
+              separatorBuilder: (context, index) => SizedBox(height: 16.h),
+              itemCount: state.articles.length,
+            );
+          }
+          return Center(child: CircularProgressIndicator(
+            color: Theme
+                .of(context)
+                .colorScheme
+                .primary,
+          ),);
+        },
+      ),
+    );
+  }
+}
+/*ChangeNotifierProvider(
       create: (context) =>
       EverythingViewModel()
         ..getEverything(widget.sourceId),
@@ -65,9 +118,7 @@ class _ArticlesListState extends State<ArticlesList> {
           );
         },
       ),
-    );
-  }
-}
+    )*/
 /*FutureBuilder(
         future: ApiManager.getEverything(widget.sourceId),
         builder: (context, snapshot) {

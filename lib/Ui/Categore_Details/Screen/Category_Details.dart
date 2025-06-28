@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_app_c14/Model/CategoryModel.dart';
-import 'package:news_app_c14/Model/MVVM/Source_view_Model.dart';
-import 'package:provider/provider.dart';
+import 'package:news_app_c14/Model/MVVM/MVVM_Cubit/CategoryDetailsViewModel.dart';
 
 import '../Widget/ArticlesList.dart';
 
@@ -20,7 +20,93 @@ class _CategoryDetailsWidgetState extends State<CategoryDetailsWidget> {
   @override
   Widget build(BuildContext context) {
     //SourceViewModel viewModel = Provider.of<SourceViewModel>(context);
-    return ChangeNotifierProvider(
+    return BlocProvider(
+      create: (context) =>
+      CategoryDetailsViewModel()
+        ..getSources(widget.categoryModel.id),
+      child: BlocBuilder<CategoryDetailsViewModel, CategoryDetailsState>(
+        builder: (context, state) {
+          var viewModel = BlocProvider.of<CategoryDetailsViewModel>(context);
+          if (state is SuccessState) { // is دي معناها انو بيشيك دا لو من النوغ كزا
+            return Padding(
+              padding: REdgeInsets.all(15),
+              child: DefaultTabController(
+                // عشان اقدر استخدم ويدجيت Tapbar لازم استخد الويدجيت دي
+                length: state.sources.length,
+                // وهنا بنحدد كام tapa بس دي بنجيبها من برا عشان نعرف فيه كام مصدر خبر
+                child: Column(
+                  children: [
+                    TabBar(
+                      isScrollable: true,
+                      tabAlignment: TabAlignment.start,
+                      labelStyle: Theme
+                          .of(context)
+                          .textTheme
+                          .titleSmall,
+                      unselectedLabelStyle: Theme
+                          .of(context)
+                          .textTheme
+                          .titleSmall
+                          ?.copyWith(
+                          fontSize: 14.sp, fontWeight: FontWeight.w500),
+                      indicatorColor: Theme
+                          .of(context)
+                          .colorScheme
+                          .primary,
+                      dividerHeight: 0,
+                      tabs: state.sources
+                          .map((sources) => Tab(text: sources.name))
+                          .toList(),
+                    ),
+                    SizedBox(height: 16.h),
+                    Expanded(
+                      child: TabBarView(
+                        children: state.sources.map((sources) =>
+                            ArticlesList(sourceId: sources.id ?? "",)).toList(),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          } else if (state is ErrorState) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(state.errorMessage, style: TextStyle(
+                    fontSize: 20.sp,
+                    color: Theme
+                        .of(context)
+                        .colorScheme
+                        .primary
+                ),),
+                SizedBox(height: 10.h,),
+                ElevatedButton(
+                    onPressed: () {
+                      /*setState(() {
+
+                        });*/
+                      //viewModel.errorMessage = null;
+                      //viewModel.getSources(widget.categoryModel.id);
+                      viewModel.getSources(widget.categoryModel.id);
+                    },
+                    child: Text("Try Again")
+                )
+              ],
+            );
+          }
+          return Center(child: CircularProgressIndicator(
+            color: Theme
+                .of(context)
+                .colorScheme
+                .primary,
+          ),);
+        },
+      ),
+    );
+  }
+}
+/*ChangeNotifierProvider(
         create: (context) =>
         SourceViewModel()
           ..getSources(widget.categoryModel.id),
@@ -241,9 +327,7 @@ class _CategoryDetailsWidgetState extends State<CategoryDetailsWidget> {
 
         },
       ),*/
-    );
-  }
-}
+    );*/
 /*Expanded(
           child: ListView.builder(
               itemBuilder: (context, index) => Text(sources[index].id??"",style: TextStyle(
