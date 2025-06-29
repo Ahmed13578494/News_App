@@ -1,0 +1,22 @@
+{
+  "welcomeMessage": "Good Morning\nHere is Some News For You",
+  "general": "General",
+  "business": "Business",
+  "entertainment": "Entertainment",
+  "health": "Health",
+  "sceince": "Sceince",
+  "sport": "Sport",
+  "technology": "Technology",
+  "view": "View All",
+  "home": "Home",
+  "vfa": "View Full Articel",
+  "search": "Search",
+  "news_App": "News App",
+  "gth": "Go To Home",
+  "theme": "Theme",
+  "language": "Language",
+  "dark": "Dark",
+  "light": "Light",
+  "english": "English",
+  "arabic": "Arabic"
+}

@@ -1,10 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../Core/resources/StringManager.dart';
 import '../../../Model/CategoryModel.dart';
 import 'CategoryItem.dart';
-
 class HomeWidget extends StatelessWidget{
   void Function(CategoryModel categoryModel) onCategoryClick;
   HomeWidget({required this.onCategoryClick});
@@ -15,7 +15,7 @@ class HomeWidget extends StatelessWidget{
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(StringManager.welcomeMessage,
+          Text(StringManager.welcomeMessage.tr(),
             style: Theme
                 .of(context)
                 .textTheme

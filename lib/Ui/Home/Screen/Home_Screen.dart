@@ -1,3 +1,6 @@
+import 'dart:ui' as ui;
+
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -27,36 +30,39 @@ class _HomeScreenState extends State<HomeScreen> {
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: CustomDrawer(onClick: showHomeWidget,),
-      appBar: AppBar(
-        title: Text(
-            categoryModel != null
-                ? categoryModel!.title
-                : StringManager.home
-        ),
-        actions: [
-          IconButton(
-              onPressed: () {
+    return Directionality(
+      textDirection: ui.TextDirection.ltr,
+      child: Scaffold(
+        drawer: CustomDrawer(onClick: showHomeWidget,),
+        appBar: AppBar(
+          title: Text(
+              categoryModel != null
+                  ? categoryModel!.title.tr()
+                  : StringManager.home.tr()
+          ),
+          actions: [
+            IconButton(
+                onPressed: () {
 
-              },
-              icon: SvgPicture.asset(AssetManager.search,
-                height: 24.h,
-                width: 24.w,
-                colorFilter: ColorFilter.mode(
-                    Theme
-                        .of(context)
-                        .colorScheme
-                        .primary,
-                    BlendMode.srcIn
-                ),
-              )
-          )
-        ],
+                },
+                icon: SvgPicture.asset(AssetManager.search,
+                  height: 24.h,
+                  width: 24.w,
+                  colorFilter: ColorFilter.mode(
+                      Theme
+                          .of(context)
+                          .colorScheme
+                          .primary,
+                      BlendMode.srcIn
+                  ),
+                )
+            )
+          ],
+        ),
+        body: categoryModel != null
+            ? CategoryDetailsWidget(categoryModel!)
+            : HomeWidget(onCategoryClick: showCategoryDetails,),
       ),
-      body: categoryModel != null
-          ? CategoryDetailsWidget(categoryModel!)
-          : HomeWidget(onCategoryClick: showCategoryDetails,),
     );
   }
 

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -5,7 +6,7 @@ import 'package:news_app_c14/Core/resources/AssetManager.dart';
 import 'package:news_app_c14/Core/resources/ColorManager.dart';
 import 'package:news_app_c14/Core/resources/StringManager.dart';
 import 'package:news_app_c14/Model/CategoryModel.dart';
-
+import 'dart:ui' as ui;
 class CategoryItem extends StatelessWidget{
   int index;
   CategoryModel categoryModel;
@@ -21,7 +22,7 @@ class CategoryItem extends StatelessWidget{
         borderRadius: BorderRadius.circular(24.r),
       ),
       child: Row(
-        textDirection: index.isOdd?TextDirection.rtl:TextDirection.ltr,
+        textDirection: index.isOdd?ui.TextDirection.rtl:ui.TextDirection.ltr,
         children: [
           Expanded(
             child: Image.asset(categoryModel.image,
@@ -40,9 +41,9 @@ class CategoryItem extends StatelessWidget{
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(categoryModel.title,style: Theme.of(context).textTheme.bodyMedium,),
+                Text(categoryModel.title.tr(),style: Theme.of(context).textTheme.bodyMedium,),
                 Directionality(
-                  textDirection: index.isOdd?TextDirection.ltr:TextDirection.rtl,
+                  textDirection: index.isOdd?ui.TextDirection.ltr:ui.TextDirection.rtl,
                   child: ElevatedButton(
                       onPressed: onPress,
                       style: ElevatedButton.styleFrom(
@@ -50,7 +51,7 @@ class CategoryItem extends StatelessWidget{
                         padding: REdgeInsetsDirectional.only(end: 16)
                       ),
                       child: Row(
-                        textDirection: index.isOdd?TextDirection.rtl:TextDirection.ltr,
+                        textDirection: index.isOdd?ui.TextDirection.rtl:ui.TextDirection.ltr,
                         children: [
                           Text(StringManager.view,
                               style:Theme.of(context).textTheme.titleLarge,

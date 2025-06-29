@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_app_c14/Core/resources/StringManager.dart';
@@ -69,7 +70,7 @@ class _ArticleDetailsSheetState extends State<ArticleDetailsSheet> {
                   padding: REdgeInsets.symmetric(vertical: 16),
                 ),
                 child: Text(
-                  StringManager.vfa,
+                  StringManager.vfa.tr(),
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
               ),

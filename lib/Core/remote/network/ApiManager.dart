@@ -29,26 +29,31 @@ class ApiManager {
       //SourcesResponse.fromJson(jsonDecode(response.body));
       return sourcesResponse;
     } catch (e) {
-      print(e);
+      print(e.toString());
       return null;
     }
   }
 
   static Future<EverythingResponse?> getEverything(String sources) async {
-    Uri url = Uri.https(
-        domain,
-        "v2/everything",
-        {
-          "apiKey": apiKey,
-          "sources": sources,
-        }
+    try {
+      Uri url = Uri.https(
+          domain,
+          "v2/everything",
+          {
+            "apiKey": apiKey,
+            "sources": sources,
+          }
 
-    );
+      );
 
-    var response = await http.get(url);
+      var response = await http.get(url);
 
-    EverythingResponse everyResponse = EverythingResponse.fromJson(
-        jsonDecode(response.body));
-    return everyResponse;
+      EverythingResponse everyResponse = EverythingResponse.fromJson(
+          jsonDecode(response.body));
+      return everyResponse;
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
   }
 }
