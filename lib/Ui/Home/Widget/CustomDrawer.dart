@@ -2,10 +2,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:news_app_c14/Core/remote/local/sharedpreferences.dart';
 import 'package:news_app_c14/Core/resources/AssetManager.dart';
 import 'package:news_app_c14/Core/resources/ColorManager.dart';
 import 'package:news_app_c14/Core/resources/StringManager.dart';
-import 'package:news_app_c14/Model/CategoryModel.dart';
+import 'package:news_app_c14/Model/ThemeProvider/ThemeProvider.dart';
+import 'package:provider/provider.dart';
 
 class CustomDrawer extends StatelessWidget{
   void Function() onClick;
@@ -13,7 +15,9 @@ class CustomDrawer extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
+    ThemeProvider provider = Provider.of(context);
     int selectedLan = context.locale.languageCode=='en'?0:1;
+    int selectedThe = provider.themeMode==ThemeMode.light?0:1;
     return Drawer(
       child: Column(
         children: [
@@ -79,7 +83,7 @@ class CustomDrawer extends StatelessWidget{
                 ),
                 SizedBox(height: 10.h,),
                 DropdownButtonFormField<String>(
-                  value: "Light",
+                  value: selectedThe==0?"Light":"Dark",
                   iconEnabledColor: ColorManager.whiteColor,
                   iconDisabledColor: ColorManager.whiteColor,
                   iconSize: 30.sp,
@@ -120,8 +124,12 @@ class CustomDrawer extends StatelessWidget{
                     onChanged: (value){
                     if(value == "Light"){
                       // Set Light
+                      provider.switchTheme(ThemeMode.light);
+                      SaveTheme.setTheme(true);
                     }else{
                       // Set Dark
+                      provider.switchTheme(ThemeMode.dark);
+                      SaveTheme.setTheme(false);
                     }
                     }
                 ),
